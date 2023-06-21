@@ -1,9 +1,12 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+
 import '../App.css';
 import Modals from '../Modals';
+
 
 function App() {
   return (
@@ -39,7 +42,7 @@ function App() {
             
             {/* Modal */}
             
-            <div className="modal show" id='modalLog' style={{ display: 'block', position: 'initial', display:'none' }}>
+            <div  id='modalLog' style={{ display: 'block', position: 'initial', display:'none' }}>
                 <Modal.Dialog>
                     <Modal.Header closeButton>
                     <Modal.Title>Modal title</Modal.Title>

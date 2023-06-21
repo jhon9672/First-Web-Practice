@@ -1,8 +1,10 @@
+// Firebase Auth
+import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js"
+import {auth} from './firebase'
+// Bootstrap
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import InputGroup from 'react-bootstrap/InputGroup'
-import Form from 'react-bootstrap/Form';
 
 
 
@@ -11,6 +13,22 @@ function Modals() {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    const [usuario, setUsuario] = useState('');
+    const [contrasena, setContrasena] = useState('');
+
+    const handleAccept = async (e) => {
+        console.log('Usuario:', usuario);
+        console.log('Contraseña:', contrasena);
+        try {
+            const userCrendential = await createUserWithEmailAndPassword(auth, usuario,contrasena);
+            console.log(userCrendential);
+            alert("Cuenta Registrada");
+        } catch (error) {
+            console.log(error);
+            alert("Error");
+        }
+      };
 
   return (
     <div class='bg-red'>
@@ -26,13 +44,20 @@ function Modals() {
 
             <div class="row justify-content-center">
                 <div class="col-9">
-                <input type="text" class="form-control rounded-pill bg-black text-white" placeholder="USUARIO"></input>
+                <input type="email" 
+                class="form-control rounded-pill bg-black text-white" 
+                placeholder="Email..."
+                onChange={event => setUsuario(event.target.value)}
+                ></input>
                 </div>
             </div>
 
             <div class="row justify-content-center">
                 <div class="col-9">
-                <input type="text" class="form-control rounded-pill bg-black text-white" placeholder="USUARIO"></input>
+                <input type="password" 
+                class="form-control rounded-pill bg-black text-white" 
+                placeholder="Usuario"
+                onChange={event => setContrasena(event.target.value)}></input>
                 </div>
             </div>
 
@@ -43,7 +68,7 @@ function Modals() {
                 <Button variant="danger" onClick={handleClose}>
                     Close
                 </Button>
-                <Button variant="success" onClick={handleClose} style={{ margin: '1%'}}>
+                <Button variant="success" onClick={handleAccept} style={{ margin: '1%'}}>
                     accept
                 </Button>
             </Modal.Body>

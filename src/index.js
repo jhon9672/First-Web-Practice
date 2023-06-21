@@ -11,7 +11,7 @@ root.render(
     
     <Header/>
 
-    {/*<App />*/}
+    {<App />}
   </React.StrictMode>
 );
 
